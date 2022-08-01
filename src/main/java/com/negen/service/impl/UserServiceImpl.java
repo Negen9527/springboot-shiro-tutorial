@@ -8,16 +8,16 @@ import com.negen.dto.UserRegisterDto;
 import com.negen.entity.User;
 import com.negen.mapper.UserMapper;
 import com.negen.service.IUserService;
+import com.negen.utils.MD5Util;
 import com.negen.utils.TokenUtil;
 import com.negen.vo.UserLoginVo;
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author ：Negen
@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+    private final String salt = "negen";
     @Autowired
     UserMapper userMapper;
 
@@ -40,6 +41,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public ServerResponse userLogin(UserLoginDto userLoginDto) {
         String username = userLoginDto.getUsername();
         String password = userLoginDto.getPassword();
+        password = MD5Util.createPasswd(password, salt);
         User userByUsername = userMapper.getUserByUsername(username);
         if (userByUsername == null) {
             throw new UnknownAccountException();
@@ -59,7 +61,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public ServerResponse userRegister(UserRegisterDto userRegisterDto) {
         User user = new User();
         BeanUtils.copyProperties(userRegisterDto, user);
+        String passwd = MD5Util.createPasswd(userRegisterDto.getPassword(), salt);
+        user.setPassword(passwd);
         userMapper.insert(user);
         return ServerResponse.createBySuccess();
+    }
+
+    @Override
+    public List<Integer> listAllIds() {
+        return userMapper.listAllIds();
     }
 }

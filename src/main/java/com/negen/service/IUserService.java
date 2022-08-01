@@ -6,6 +6,8 @@ import com.negen.dto.UserLoginDto;
 import com.negen.dto.UserRegisterDto;
 import com.negen.entity.User;
 
+import java.util.List;
+
 /**
  * @author ：Negen
  * @date ：2022/7/29 20:58
@@ -22,4 +24,6 @@ public interface IUserService extends IService<User> {
      * @return
      */
     ServerResponse userRegister(UserRegisterDto userRegisterDto);
+
+    List<Integer> listAllIds();
 }

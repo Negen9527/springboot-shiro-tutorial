@@ -1,43 +1,43 @@
 package com.negen.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
-import java.time.LocalDate;
-
 /**
- * @author ：Negen
- * @date ：2022/7/29 20:49
- * @description：
+ * <p>
+ * 
+ * </p>
+ *
+ * @author Negen
+ * @since 2022-08-01
  */
 @Data
-@TableName("user")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class User implements Serializable {
+public class RolePermissionR implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * id
+     * 自增id
      */
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
-     * 账号
+     * 角色id
      */
-    private String username;
+    private Integer roleId;
 
     /**
-     * 密码
+     * 权限id
      */
-    private String password;
+    private Integer permissionId;
 
     /**
      * 创建时间
@@ -50,9 +50,9 @@ public class User implements Serializable {
     private LocalDate updateTime;
 
     /**
-     * 最近登录时间
+     * 数据记录 0 正常 1删除
      */
-    private LocalDate lastLoginTime;
-
     private Integer status;
+
+
 }

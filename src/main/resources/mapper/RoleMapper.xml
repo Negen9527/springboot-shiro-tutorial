@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.negen.mapper.UserMapper">
+<mapper namespace="com.negen.mapper.RoleMapper">
 
-    <select id="getUserByUsername" resultType="com.negen.entity.User">
-        select * from user where username = #{username}
-    </select>
     <select id="listAllIds" resultType="java.lang.Integer">
-        select id from user
+        select id from role
     </select>
 </mapper>
