@@ -10,13 +10,16 @@ import com.negen.mapper.UserMapper;
 import com.negen.service.IUserService;
 import com.negen.utils.MD5Util;
 import com.negen.utils.TokenUtil;
+import com.negen.vo.UserInfoVo;
 import com.negen.vo.UserLoginVo;
+import io.jsonwebtoken.Claims;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -54,7 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         BeanUtils.copyProperties(userByUsername, userLoginVo);
         String token = TokenUtil.sign(userLoginVo.getUsername());
         userLoginVo.setToken(token);
-        return ServerResponse.createBySuccess().data(userLoginVo);
+        return ServerResponse.createBySuccess().data(userLoginVo).code(20000);
     }
 
     @Override
@@ -70,5 +73,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public List<Integer> listAllIds() {
         return userMapper.listAllIds();
+    }
+
+    @Override
+    public ServerResponse userInfo(String token) {
+        Claims claims = TokenUtil.verify(token);
+        String username = claims.getSubject();
+        User user = userMapper.getUserByUsername(username);
+        UserInfoVo userInfoVo = new UserInfoVo();
+        userInfoVo.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        userInfoVo.setName(user.getUsername());
+        userInfoVo.setRoles(Arrays.asList("admin"));
+        return ServerResponse.createBySuccess().data(userInfoVo).code(20000);
     }
 }

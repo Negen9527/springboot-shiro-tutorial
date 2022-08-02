@@ -4,7 +4,6 @@ import com.negen.common.ServerResponse;
 import com.negen.dto.UserLoginDto;
 import com.negen.dto.UserRegisterDto;
 import com.negen.service.impl.UserServiceImpl;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +28,8 @@ public class UserController {
         return userService.userRegister(userRegisterDto);
     }
 
-    @GetMapping("/getUser")
-    @RequiresPermissions("permis1")
-    public ServerResponse getUser() {
-        return ServerResponse.createBySuccess();
+    @GetMapping("info")
+    public ServerResponse userInfo(@RequestParam("token") String token) {
+        return userService.userInfo(token);
     }
 }

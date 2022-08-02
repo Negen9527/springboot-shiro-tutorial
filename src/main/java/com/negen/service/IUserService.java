@@ -26,4 +26,6 @@ public interface IUserService extends IService<User> {
     ServerResponse userRegister(UserRegisterDto userRegisterDto);
 
     List<Integer> listAllIds();
+
+    ServerResponse userInfo(String token);
 }
