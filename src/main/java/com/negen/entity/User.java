@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * @author ：Negen
@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @TableName("user")
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class User implements Serializable {
+public class User extends BaseColumn implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,20 +39,11 @@ public class User implements Serializable {
      */
     private String password;
 
-    /**
-     * 创建时间
-     */
-    private LocalDate createTime;
 
-    /**
-     * 更新时间
-     */
-    private LocalDate updateTime;
 
     /**
      * 最近登录时间
      */
-    private LocalDate lastLoginTime;
+    private LocalDateTime lastLoginTime;
 
-    private Integer status;
 }

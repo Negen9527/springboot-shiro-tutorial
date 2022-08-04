@@ -1,8 +1,10 @@
 package com.negen.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.negen.common.ServerResponse;
+import com.negen.dto.UserListDto;
 import com.negen.dto.UserLoginDto;
 import com.negen.dto.UserRegisterDto;
 import com.negen.entity.User;
@@ -10,7 +12,9 @@ import com.negen.mapper.UserMapper;
 import com.negen.service.IUserService;
 import com.negen.utils.MD5Util;
 import com.negen.utils.TokenUtil;
+import com.negen.vo.PageListVo;
 import com.negen.vo.UserInfoVo;
+import com.negen.vo.UserListItemVo;
 import com.negen.vo.UserLoginVo;
 import io.jsonwebtoken.Claims;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -19,6 +23,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -85,5 +90,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         userInfoVo.setName(user.getUsername());
         userInfoVo.setRoles(Arrays.asList("admin"));
         return ServerResponse.createBySuccess().data(userInfoVo).code(20000);
+    }
+
+    public ServerResponse userList(UserListDto userListDto) {
+        int pageNo = userListDto.getPageNo();
+        int pageSize = userListDto.getPageSize();
+        Page<User> userPage = new Page<>(pageNo, pageSize);
+        Page<User> userPageResult = userMapper.selectPage(userPage, null);
+        long total = userPageResult.getTotal();
+        List<User> users = userPageResult.getRecords();
+        ArrayList<UserListItemVo> userListItems = new ArrayList<>();
+        users.forEach(user -> {
+            UserListItemVo userListItemVo = new UserListItemVo();
+            BeanUtils.copyProperties(user, userListItemVo);
+            userListItems.add(userListItemVo);
+        });
+        PageListVo pageListVo = new PageListVo();
+        pageListVo.setTotal(total);
+        pageListVo.setItems(userListItems);
+        return ServerResponse.createBySuccess().data(pageListVo);
     }
 }

@@ -3,7 +3,7 @@ package com.negen.common;
 import lombok.Data;
 
 public enum ResponseEnum {
-    SUCCESS(0, "成功"),
+    SUCCESS(20000, "成功"),
     ERROR(-1, "失败"),
     ;
     int code;

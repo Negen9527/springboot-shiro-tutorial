@@ -40,7 +40,7 @@ public class JWTFilter extends AccessControlFilter {
         }catch (AuthenticationException e){
             new ResponseUtil()
                     .response((HttpServletResponse) servletResponse,
-                            ServerResponse.createByError().msg("请登录后访问"));
+                            ServerResponse.createByError().msg("请登录后访问").code(50008));
             return false;
         }
         // 如果没有抛出异常则代表登入成功，返回true

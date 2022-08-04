@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class UserRoleR implements Serializable {
+public class UserRoleR extends BaseColumn implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,21 +38,5 @@ public class UserRoleR implements Serializable {
      * 角色id
      */
     private Integer roleId;
-
-    /**
-     * 创建时间
-     */
-    private LocalDate createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDate updateTime;
-
-    /**
-     * 数据状态 0 正常 1 删除
-     */
-    private Integer status;
-
 
 }

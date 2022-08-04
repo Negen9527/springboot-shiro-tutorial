@@ -19,7 +19,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class RolePermissionR implements Serializable {
+public class RolePermissionR extends BaseColumn implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,21 +38,4 @@ public class RolePermissionR implements Serializable {
      * 权限id
      */
     private Integer permissionId;
-
-    /**
-     * 创建时间
-     */
-    private LocalDate createTime;
-
-    /**
-     * 更新时间
-     */
-    private LocalDate updateTime;
-
-    /**
-     * 数据记录 0 正常 1删除
-     */
-    private Integer status;
-
-
 }

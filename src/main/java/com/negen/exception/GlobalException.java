@@ -57,6 +57,6 @@ public class GlobalException {
     @ExceptionHandler(value = AuthorizationException.class)
     public void AuthorizationErrorHandler(HttpServletResponse res, Exception e) throws IOException {
 //        myresponse.makeResponse(res,"4","请登录后访问！"+e.toString());
-        responseUtil.response(res, ServerResponse.createByError().msg("请登录后访问"));
+        responseUtil.response(res, ServerResponse.createByError().msg("请登录后访问").code(50008));
     }
 }
