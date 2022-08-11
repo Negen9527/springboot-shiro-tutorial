@@ -2,6 +2,7 @@ package com.negen.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.negen.common.ServerResponse;
+import com.negen.dto.UserAddDto;
 import com.negen.dto.UserLoginDto;
 import com.negen.dto.UserRegisterDto;
 import com.negen.entity.User;
@@ -28,4 +29,6 @@ public interface IUserService extends IService<User> {
     List<Integer> listAllIds();
 
     ServerResponse userInfo(String token);
+
+    ServerResponse addUser(UserAddDto userAddDto);
 }

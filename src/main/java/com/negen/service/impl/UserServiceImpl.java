@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.negen.common.ServerResponse;
+import com.negen.dto.UserAddDto;
 import com.negen.dto.UserListDto;
 import com.negen.dto.UserLoginDto;
 import com.negen.dto.UserRegisterDto;
@@ -90,6 +91,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         userInfoVo.setName(user.getUsername());
         userInfoVo.setRoles(Arrays.asList("admin"));
         return ServerResponse.createBySuccess().data(userInfoVo).code(20000);
+    }
+
+    @Override
+    public ServerResponse addUser(UserAddDto userAddDto) {
+        User user = new User();
+        BeanUtils.copyProperties(userAddDto, user);
+        userMapper.insert(user);
+        return ServerResponse.createBySuccess();
     }
 
     public ServerResponse userList(UserListDto userListDto) {

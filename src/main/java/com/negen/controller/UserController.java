@@ -1,6 +1,7 @@
 package com.negen.controller;
 
 import com.negen.common.ServerResponse;
+import com.negen.dto.UserAddDto;
 import com.negen.dto.UserListDto;
 import com.negen.dto.UserLoginDto;
 import com.negen.dto.UserRegisterDto;
@@ -37,5 +38,9 @@ public class UserController {
     @GetMapping("list")
     public ServerResponse userList(UserListDto userListDto) {
         return userService.userList(userListDto);
+    }
+    @PostMapping("add")
+    public ServerResponse addUser(@RequestBody UserAddDto userAddDto) {
+        return userService.addUser(userAddDto);
     }
 }

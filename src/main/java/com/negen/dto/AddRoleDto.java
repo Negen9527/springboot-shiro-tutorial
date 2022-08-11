@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class AddRoleDto {
     String name;
-    String desciption;
+    String description;
 }

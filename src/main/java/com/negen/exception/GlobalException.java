@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * @author ：Negen
@@ -58,5 +59,11 @@ public class GlobalException {
     public void AuthorizationErrorHandler(HttpServletResponse res, Exception e) throws IOException {
 //        myresponse.makeResponse(res,"4","请登录后访问！"+e.toString());
         responseUtil.response(res, ServerResponse.createByError().msg("请登录后访问").code(50008));
+    }
+
+    @ExceptionHandler(value = SQLException.class)
+    public void SQLExceptionErrorHandler(HttpServletResponse res, Exception e) throws IOException {
+        e.printStackTrace();
+        responseUtil.response(res, ServerResponse.createByError().msg("内部sql错误，请检查后台"));
     }
 }

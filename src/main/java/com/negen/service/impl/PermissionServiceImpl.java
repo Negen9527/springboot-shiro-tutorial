@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -29,7 +30,7 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
     public ServerResponse addPermission(AddPermissionDto addPermissionDto) {
         Permission permission = new Permission();
         BeanUtils.copyProperties(addPermissionDto, permission);
-        permission.setCreateTime(LocalDate.now());
+        permission.setCreateTime(LocalDateTime.now());
         permissionMapper.insert(permission);
         return ServerResponse.createBySuccess();
     }
