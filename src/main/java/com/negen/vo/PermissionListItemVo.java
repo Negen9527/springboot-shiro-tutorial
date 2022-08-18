@@ -1,7 +1,5 @@
 package com.negen.vo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -9,18 +7,18 @@ import java.time.LocalDateTime;
 
 /**
  * @author ：Negen
- * @date ：2022/8/11 22:01
+ * @date ：2022/8/18 22:22
  * @description：
  */
 @Data
-public class RoleListItemVo {
+public class PermissionListItemVo {
     /**
      * 自增id
      */
     private Integer id;
 
     /**
-     * 角色名
+     * 权限名
      */
     private String name;
 

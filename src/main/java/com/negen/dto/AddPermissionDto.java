@@ -10,5 +10,5 @@ import lombok.Data;
 @Data
 public class AddPermissionDto {
     String name;
-    String desciption;
+    String description;
 }

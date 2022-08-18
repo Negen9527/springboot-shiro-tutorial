@@ -3,13 +3,10 @@ package com.negen.controller;
 
 import com.negen.common.ServerResponse;
 import com.negen.dto.AddPermissionDto;
+import com.negen.dto.PermissionListDto;
 import com.negen.service.impl.PermissionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * <p>
@@ -25,8 +22,13 @@ public class PermissionController {
     @Autowired
     PermissionServiceImpl permissionService;
 
-    @PostMapping
+    @PostMapping("add")
     public ServerResponse addPermission(@RequestBody AddPermissionDto addPermissionDto) {
         return permissionService.addPermission(addPermissionDto);
+    }
+
+    @GetMapping("list")
+    public ServerResponse listPermission(PermissionListDto permissionListDto){
+        return permissionService.listPermission(permissionListDto);
     }
 }
