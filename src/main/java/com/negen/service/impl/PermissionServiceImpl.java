@@ -65,4 +65,10 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         permissionListItemVoPageListVo.setItems(permissionListItemVos);
         return ServerResponse.createBySuccess().data(permissionListItemVoPageListVo);
     }
+
+    @Override
+    public ServerResponse listTreePermission() {
+
+        return null;
+    }
 }

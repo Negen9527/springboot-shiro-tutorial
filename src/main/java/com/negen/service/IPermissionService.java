@@ -27,4 +27,10 @@ public interface IPermissionService extends IService<Permission> {
      * @return
      */
     ServerResponse listPermission(PermissionListDto permissionListDto);
+
+    /**
+     * 获取树形结构的权限列表
+     * @return
+     */
+    ServerResponse listTreePermission();
 }

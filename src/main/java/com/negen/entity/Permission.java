@@ -30,6 +30,11 @@ public class Permission extends BaseColumn implements Serializable {
     private Integer id;
 
     /**
+     * 父级id
+     */
+    private Integer parentId;
+
+    /**
      * 权限名
      */
     private String name;

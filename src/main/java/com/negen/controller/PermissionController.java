@@ -31,4 +31,14 @@ public class PermissionController {
     public ServerResponse listPermission(PermissionListDto permissionListDto){
         return permissionService.listPermission(permissionListDto);
     }
+
+    /**
+     * 获取树形结构的权限列表
+     * @return
+     */
+    @GetMapping("list/tree")
+    public ServerResponse listTreePermission(){
+        return permissionService.listTreePermission();
+    }
+
 }
