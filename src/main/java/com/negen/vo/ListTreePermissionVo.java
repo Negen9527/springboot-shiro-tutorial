@@ -1,7 +1,9 @@
 package com.negen.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -32,5 +34,9 @@ public class ListTreePermissionVo {
      */
     private Integer parentId;
     private String label;
+    private String description;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createTime;
+    private Integer status;
     private List<ListTreePermissionVo> children;
 }
