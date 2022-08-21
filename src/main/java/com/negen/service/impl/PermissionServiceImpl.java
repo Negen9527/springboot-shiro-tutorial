@@ -9,6 +9,8 @@ import com.negen.entity.Permission;
 import com.negen.mapper.PermissionMapper;
 import com.negen.service.IPermissionService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.negen.utils.List2Tree;
+import com.negen.vo.ListTreePermissionVo;
 import com.negen.vo.PageListVo;
 import com.negen.vo.PermissionListItemVo;
 import org.springframework.beans.BeanUtils;
@@ -68,7 +70,9 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
 
     @Override
     public ServerResponse listTreePermission() {
-
-        return null;
+        //查询所有的权限
+        List<ListTreePermissionVo> listTreePermissionVos = permissionMapper.listAllPermission();
+        List<ListTreePermissionVo> tree = List2Tree.listToTree(listTreePermissionVos);
+        return ServerResponse.createBySuccess().data(tree);
     }
 }

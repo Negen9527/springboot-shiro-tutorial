@@ -2,6 +2,7 @@ package com.negen.mapper;
 
 import com.negen.entity.Permission;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.negen.vo.ListTreePermissionVo;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ import java.util.List;
 public interface PermissionMapper extends BaseMapper<Permission> {
 
     List<Integer> listAllIds();
+
+    List<ListTreePermissionVo> listAllPermission();
 }

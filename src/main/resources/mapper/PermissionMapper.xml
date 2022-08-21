@@ -5,4 +5,17 @@
     <select id="listAllIds" resultType="java.lang.Integer">
         select id from permission
     </select>
+    
+    <resultMap id="listAllPermission" type="com.negen.vo.ListTreePermissionVo">
+        <id column="id" property="id"/>
+        <result column="name" property="label"/>
+        <result column="parent_id" property="parentId"/>
+    </resultMap>
+
+    <select id="listAllPermission" resultMap="listAllPermission">
+        select
+        *
+        from permission
+        where status = 0
+    </select>
 </mapper>
