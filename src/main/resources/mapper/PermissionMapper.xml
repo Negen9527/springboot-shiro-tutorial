@@ -21,4 +21,14 @@
         from permission
         where status = 0
     </select>
+
+    <update id="deleteById">
+        update permission
+        set status = 1
+        where id in
+        <foreach collection="permissionIds" index="index" item="permissionId" separator="," open="(" close=")">
+            #{permissionId}
+        </foreach>
+    </update>
+
 </mapper>

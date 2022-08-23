@@ -11,4 +11,8 @@ import lombok.Data;
 public class AddPermissionDto {
     String name;
     String description;
+    /**
+     * 父级id
+     */
+    Integer parentId = 0;
 }

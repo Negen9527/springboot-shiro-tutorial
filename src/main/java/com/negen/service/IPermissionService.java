@@ -2,6 +2,7 @@ package com.negen.service;
 
 import com.negen.common.ServerResponse;
 import com.negen.dto.AddPermissionDto;
+import com.negen.dto.DeletePermissionDto;
 import com.negen.dto.PermissionListDto;
 import com.negen.entity.Permission;
 import com.baomidou.mybatisplus.extension.service.IService;
@@ -33,4 +34,10 @@ public interface IPermissionService extends IService<Permission> {
      * @return
      */
     ServerResponse listTreePermission();
+
+    /**
+     * 根据id删除权限信息
+     * @return
+     */
+    ServerResponse deletePermission(DeletePermissionDto deletePermissionDto);
 }

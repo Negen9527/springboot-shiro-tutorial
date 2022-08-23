@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.negen.common.ServerResponse;
 import com.negen.dto.AddPermissionDto;
+import com.negen.dto.DeletePermissionDto;
 import com.negen.dto.PermissionListDto;
 import com.negen.entity.Permission;
 import com.negen.mapper.PermissionMapper;
@@ -53,7 +54,9 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         int pageNo = permissionListDto.getPageNo();
         int pageSize = permissionListDto.getPageSize();
         Page<Permission> permissionPage = new Page<>(pageNo, pageSize);
-        Page<Permission> pageResult = permissionMapper.selectPage(permissionPage, null);
+        QueryWrapper<Permission> permissionQueryWrapper = new QueryWrapper<>();
+        permissionQueryWrapper.eq("status", 0);
+        Page<Permission> pageResult = permissionMapper.selectPage(permissionPage, permissionQueryWrapper);
         List<Permission> permissions = pageResult.getRecords();
         ArrayList<PermissionListItemVo> permissionListItemVos = new ArrayList<>();
         permissions.forEach(permission -> {
@@ -74,5 +77,14 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         List<ListTreePermissionVo> listTreePermissionVos = permissionMapper.listAllPermission();
         List<ListTreePermissionVo> tree = List2Tree.listToTree(listTreePermissionVos);
         return ServerResponse.createBySuccess().data(tree);
+    }
+
+    @Override
+    public ServerResponse deletePermission(DeletePermissionDto deletePermissionDto) {
+        List<Integer> permissionIds = deletePermissionDto.getPermissionIds();
+        if (null != permissionIds && permissionIds.size() > 0){
+            permissionMapper.deleteById(permissionIds);
+        }
+        return ServerResponse.createBySuccess();
     }
 }

@@ -19,4 +19,6 @@ public interface PermissionMapper extends BaseMapper<Permission> {
     List<Integer> listAllIds();
 
     List<ListTreePermissionVo> listAllPermission();
+
+    void deleteById(List<Integer> permissionIds);
 }

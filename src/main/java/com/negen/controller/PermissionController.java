@@ -3,6 +3,7 @@ package com.negen.controller;
 
 import com.negen.common.ServerResponse;
 import com.negen.dto.AddPermissionDto;
+import com.negen.dto.DeletePermissionDto;
 import com.negen.dto.PermissionListDto;
 import com.negen.service.impl.PermissionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,8 @@ public class PermissionController {
         return permissionService.listTreePermission();
     }
 
+    @PostMapping("delete")
+    public ServerResponse deletePermission(@RequestBody DeletePermissionDto deletePermissionDto){
+        return permissionService.deletePermission(deletePermissionDto);
+    }
 }
