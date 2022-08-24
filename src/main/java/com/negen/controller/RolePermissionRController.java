@@ -27,8 +27,8 @@ public class RolePermissionRController {
     @Autowired
     RolePermissionRServiceImpl rolePermissionRService;
 
-    @PostMapping
-    public ServerResponse addRolePermissionR(@RequestBody List<AddRolePermissionRDto> addRolePermissionRDtos) {
-        return rolePermissionRService.addRolePermissionR(addRolePermissionRDtos);
+    @PostMapping("add")
+    public ServerResponse addRolePermissionR(@RequestBody AddRolePermissionRDto addRolePermissionRDto) {
+        return rolePermissionRService.addRolePermissionR(addRolePermissionRDto);
     }
 }

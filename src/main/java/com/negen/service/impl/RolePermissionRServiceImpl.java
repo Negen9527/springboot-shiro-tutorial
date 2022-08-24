@@ -35,25 +35,27 @@ public class RolePermissionRServiceImpl extends ServiceImpl<RolePermissionRMappe
     PermissionServiceImpl permissionService;
 
     @Override
-    public ServerResponse addRolePermissionR(List<AddRolePermissionRDto> addRolePermissionRDtos) {
+    public ServerResponse addRolePermissionR(AddRolePermissionRDto addRolePermissionRDto) {
         List<Integer> roleIds = roleService.listAllIds();
         List<Integer> permissionIds = permissionService.listAllIds();
         ArrayList<RolePermissionR> rolePermissionRs = new ArrayList<>();
-        if (null == addRolePermissionRDtos || addRolePermissionRDtos.isEmpty()){
-            throw new RuntimeException("addRolePermissionRDtos is null");
+        Integer roleId = addRolePermissionRDto.getRoleId();
+        List<Integer> _permissionIds = addRolePermissionRDto.getPermissionIds();
+        if (null == _permissionIds || _permissionIds.isEmpty()){
+            throw new RuntimeException("permissionIds is null");
         }
-        for (int i = 0; i < addRolePermissionRDtos.size(); i++) {
-            AddRolePermissionRDto addRolePermissionRDto = addRolePermissionRDtos.get(i);
-            String roleId = addRolePermissionRDto.getRoleId();
-            String permissionId = addRolePermissionRDto.getPermissionId();
-            if (!roleIds.contains(roleId)){
-                throw new RuntimeException("roleId is not exist");
-            }
+
+        if (!roleIds.contains(roleId)){
+            throw new RuntimeException("roleId is not exist");
+        }
+        for (int i = 0; i < _permissionIds.size(); i++) {
+            Integer permissionId = _permissionIds.get(i);
             if (!permissionIds.contains(permissionId)){
                 throw new RuntimeException("permissionId is not exist");
             }
             RolePermissionR rolePermissionR = new RolePermissionR();
-            BeanUtils.copyProperties(addRolePermissionRDto, rolePermissionR);
+            rolePermissionR.setRoleId(roleId);
+            rolePermissionR.setPermissionId(permissionId);
             rolePermissionRs.add(rolePermissionR);
         }
         this.saveBatch(rolePermissionRs);

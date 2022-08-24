@@ -17,5 +17,5 @@ import java.util.List;
  */
 public interface IRolePermissionRService extends IService<RolePermissionR> {
 
-    ServerResponse addRolePermissionR(List<AddRolePermissionRDto> addRolePermissionRDtos);
+    ServerResponse addRolePermissionR(AddRolePermissionRDto addRolePermissionRDto);
 }

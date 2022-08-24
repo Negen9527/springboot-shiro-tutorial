@@ -2,6 +2,8 @@ package com.negen.dto;
 
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * @author ：Negen
  * @date ：2022/8/1 22:28
@@ -9,6 +11,6 @@ import lombok.Data;
  */
 @Data
 public class AddRolePermissionRDto {
-    String roleId;
-    String permissionId;
+    Integer roleId;
+    List<Integer> permissionIds;
 }
