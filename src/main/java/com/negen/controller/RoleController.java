@@ -31,4 +31,9 @@ public class RoleController {
     public ServerResponse listRole(RoleListDto roleListDto){
         return roleService.listRole(roleListDto);
     }
+
+    @GetMapping("listByRoleId")
+    public ServerResponse listByRoleId(@RequestParam("roleId")Integer roleId){
+        return roleService.listByRoleId(roleId);
+    }
 }

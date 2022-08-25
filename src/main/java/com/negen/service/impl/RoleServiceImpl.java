@@ -6,6 +6,7 @@ import com.negen.dto.AddRoleDto;
 import com.negen.dto.RoleListDto;
 import com.negen.entity.Role;
 import com.negen.mapper.RoleMapper;
+import com.negen.mapper.RolePermissionRMapper;
 import com.negen.service.IRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.negen.vo.PageListVo;
@@ -32,6 +33,8 @@ import java.util.List;
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
     @Autowired
     RoleMapper roleMapper;
+    @Autowired
+    RolePermissionRMapper rolePermissionRMapper;
     @Override
     public ServerResponse addRole(AddRoleDto addRoleDto) {
         Role role = new Role();
@@ -64,6 +67,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         roleListItemVoPageListVo.setItems(userListItemVos);
         roleListItemVoPageListVo.setTotal(total);
         return ServerResponse.createBySuccess().data(roleListItemVoPageListVo);
+    }
+
+    @Override
+    public ServerResponse listByRoleId(Integer roleId) {
+        List<Integer> permissionIds = rolePermissionRMapper.listByRoleId(roleId);
+        if (permissionIds == null)permissionIds = new ArrayList<>();
+        return ServerResponse.createBySuccess().data(permissionIds);
     }
 
 }

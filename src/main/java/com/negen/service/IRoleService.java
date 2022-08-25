@@ -28,4 +28,11 @@ public interface IRoleService extends IService<Role> {
     List<Integer> listAllIds();
 
     ServerResponse listRole(RoleListDto roleListDto);
+
+    /**
+     * 获取角色下的权限 id
+     * @param roleId
+     * @return
+     */
+    ServerResponse listByRoleId(Integer roleId);
 }

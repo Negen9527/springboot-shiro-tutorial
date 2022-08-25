@@ -34,6 +34,9 @@ public class RolePermissionRServiceImpl extends ServiceImpl<RolePermissionRMappe
     @Autowired
     PermissionServiceImpl permissionService;
 
+    @Autowired
+    RolePermissionRMapper rolePermissionRMapper;
+
     @Override
     public ServerResponse addRolePermissionR(AddRolePermissionRDto addRolePermissionRDto) {
         List<Integer> roleIds = roleService.listAllIds();
@@ -48,6 +51,8 @@ public class RolePermissionRServiceImpl extends ServiceImpl<RolePermissionRMappe
         if (!roleIds.contains(roleId)){
             throw new RuntimeException("roleId is not exist");
         }
+        //清空原有的关系
+        rolePermissionRMapper.deleteByRoleId(roleId);
         for (int i = 0; i < _permissionIds.size(); i++) {
             Integer permissionId = _permissionIds.get(i);
             if (!permissionIds.contains(permissionId)){
