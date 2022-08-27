@@ -44,9 +44,9 @@ public class RolePermissionRServiceImpl extends ServiceImpl<RolePermissionRMappe
         ArrayList<RolePermissionR> rolePermissionRs = new ArrayList<>();
         Integer roleId = addRolePermissionRDto.getRoleId();
         List<Integer> _permissionIds = addRolePermissionRDto.getPermissionIds();
-        if (null == _permissionIds || _permissionIds.isEmpty()){
+/*        if (null == _permissionIds || _permissionIds.isEmpty()){
             throw new RuntimeException("permissionIds is null");
-        }
+        }*/
 
         if (!roleIds.contains(roleId)){
             throw new RuntimeException("roleId is not exist");
