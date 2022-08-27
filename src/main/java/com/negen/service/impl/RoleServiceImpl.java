@@ -9,6 +9,7 @@ import com.negen.mapper.RoleMapper;
 import com.negen.mapper.RolePermissionRMapper;
 import com.negen.service.IRoleService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.negen.vo.ListRoleTreeVo;
 import com.negen.vo.PageListVo;
 import com.negen.vo.RoleListItemVo;
 import com.negen.vo.UserListItemVo;
@@ -74,6 +75,13 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IR
         List<Integer> permissionIds = rolePermissionRMapper.listByRoleId(roleId);
         if (permissionIds == null)permissionIds = new ArrayList<>();
         return ServerResponse.createBySuccess().data(permissionIds);
+    }
+
+    @Override
+    public ServerResponse listRoleTree() {
+        List<ListRoleTreeVo> listRoleTreeVos = roleMapper.getListTree();
+        if (null == listRoleTreeVos) listRoleTreeVos = new ArrayList<>();
+        return ServerResponse.createBySuccess().data(listRoleTreeVos);
     }
 
 }

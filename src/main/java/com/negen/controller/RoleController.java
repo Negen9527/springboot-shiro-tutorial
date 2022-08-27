@@ -36,4 +36,10 @@ public class RoleController {
     public ServerResponse listByRoleId(@RequestParam("roleId")Integer roleId){
         return roleService.listByRoleId(roleId);
     }
+
+    @GetMapping("list/tree")
+    public ServerResponse listRoleTree(){
+        return roleService.listRoleTree();
+    }
+
 }

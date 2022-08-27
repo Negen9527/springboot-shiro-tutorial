@@ -2,6 +2,7 @@ package com.negen.mapper;
 
 import com.negen.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.negen.vo.ListRoleTreeVo;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ import java.util.List;
 public interface RoleMapper extends BaseMapper<Role> {
 
     List<Integer> listAllIds();
+
+    List<ListRoleTreeVo> getListTree();
 }

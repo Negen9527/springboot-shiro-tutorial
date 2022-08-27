@@ -35,4 +35,10 @@ public interface IRoleService extends IService<Role> {
      * @return
      */
     ServerResponse listByRoleId(Integer roleId);
+
+    /**
+     * 获取树状角色
+     * @return
+     */
+    ServerResponse listRoleTree();
 }
