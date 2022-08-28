@@ -17,5 +17,5 @@ import java.util.List;
  */
 public interface IUserRoleRService extends IService<UserRoleR> {
 
-    ServerResponse addUserRoleR(List<AddUserRoleRDto> addUserRoleRDtos);
+    ServerResponse addUserRoleR(AddUserRoleRDto addUserRoleRDto);
 }

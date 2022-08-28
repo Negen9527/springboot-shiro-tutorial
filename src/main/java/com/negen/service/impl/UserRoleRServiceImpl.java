@@ -32,17 +32,14 @@ public class UserRoleRServiceImpl extends ServiceImpl<UserRoleRMapper, UserRoleR
     RoleServiceImpl roleService;
 
     @Override
-    public ServerResponse addUserRoleR(List<AddUserRoleRDto> addUserRoleRDtos) {
+    public ServerResponse addUserRoleR(AddUserRoleRDto addUserRoleRDto) {
         List<Integer> userIds = userService.listAllIds();
         List<Integer> roleIds = roleService.listAllIds();
         ArrayList<UserRoleR> userRoleRs = new ArrayList<>();
-        if (null == addUserRoleRDtos || addUserRoleRDtos.isEmpty()){
-            throw new RuntimeException("addUserRoleRDtos is empty");
-        }
-        for (int i = 0; i < addUserRoleRDtos.size(); i++) {
-            AddUserRoleRDto addUserRoleRDto = addUserRoleRDtos.get(i);
-            Integer userId = addUserRoleRDto.getUserId();
-            Integer roleId = addUserRoleRDto.getRoleId();
+        Integer userId = addUserRoleRDto.getUserId();
+        List<Integer> _roleIds = addUserRoleRDto.getRoleIds();
+        for (int i = 0; i < _roleIds.size(); i++) {
+            Integer roleId = _roleIds.get(i);
             if (!userIds.contains(userId)){
                 throw new RuntimeException("userId is not exist");
             }
@@ -50,7 +47,8 @@ public class UserRoleRServiceImpl extends ServiceImpl<UserRoleRMapper, UserRoleR
                 throw new RuntimeException("roleId is not exist");
             }
             UserRoleR userRoleR = new UserRoleR();
-            BeanUtils.copyProperties(addUserRoleRDto, userRoleR);
+            userRoleR.setUserId(userId);
+            userRoleR.setRoleId(roleId);
             userRoleRs.add(userRoleR);
         }
         this.saveBatch(userRoleRs);

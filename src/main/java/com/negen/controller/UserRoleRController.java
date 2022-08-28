@@ -28,7 +28,7 @@ public class UserRoleRController {
     UserRoleRServiceImpl userRoleRService;
 
     @PostMapping
-    public ServerResponse addUserRoleR(@RequestBody List<AddUserRoleRDto> addUserRoleRDtos) {
-        return userRoleRService.addUserRoleR(addUserRoleRDtos);
+    public ServerResponse addUserRoleR(@RequestBody AddUserRoleRDto addUserRoleRDto) {
+        return userRoleRService.addUserRoleR(addUserRoleRDto);
     }
 }
